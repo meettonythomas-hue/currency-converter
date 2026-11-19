@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <currency_converter>
+            <general>
+                <enabled>1</enabled>
+                <default_from>USD</default_from>
+                <default_to>EUR</default_to>
+                <include_crypto>1</include_crypto>
+                <show_footer_link>1</show_footer_link>
+            </general>
+            <api>
+                <base_url>https://api.frankfurter.dev/v2</base_url>
+                <timeout>10</timeout>
+                <currencies_ttl>86400</currencies_ttl>
+                <rate_ttl>3600</rate_ttl>
+                <history_ttl>21600</history_ttl>
+            </api>
+        </currency_converter>
+    </default>
+</config>

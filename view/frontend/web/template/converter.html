@@ -1,0 +1,113 @@
+<!--
+/**
+ * Copyright © Tony. All rights reserved.
+ */
+-->
+<div class="tony-cc">
+    <!-- ko if: unavailable -->
+    <div class="message error" role="alert">
+        <div data-bind="i18n: 'Exchange rates are temporarily unavailable. Please try again later.'"></div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko ifnot: unavailable -->
+    <form class="tony-cc-form" data-bind="submit: refresh" novalidate>
+        <div class="tony-cc-field tony-cc-field--amount">
+            <label class="tony-cc-label" for="tony-cc-amount" data-bind="i18n: 'Amount'"></label>
+            <input id="tony-cc-amount" class="input-text" type="number" min="0" step="any" inputmode="decimal"
+                   data-bind="textInput: amount">
+        </div>
+
+        <div class="tony-cc-field">
+            <label class="tony-cc-label" for="tony-cc-from" data-bind="i18n: 'From'"></label>
+            <select id="tony-cc-from" data-bind="value: from, foreach: currencyGroups">
+                <optgroup data-bind="attr: {label: label}, foreach: items">
+                    <option data-bind="value: code, text: label"></option>
+                </optgroup>
+            </select>
+        </div>
+
+        <button type="button" class="action secondary tony-cc-swap"
+                data-bind="click: swap, attr: {'aria-label': swapLabel, title: swapLabel}">
+            <span aria-hidden="true">&#8644;</span>
+        </button>
+
+        <div class="tony-cc-field">
+            <label class="tony-cc-label" for="tony-cc-to" data-bind="i18n: 'To'"></label>
+            <select id="tony-cc-to" data-bind="value: to, foreach: currencyGroups">
+                <optgroup data-bind="attr: {label: label}, foreach: items">
+                    <option data-bind="value: code, text: label"></option>
+                </optgroup>
+            </select>
+        </div>
+    </form>
+
+    <section class="tony-cc-result" aria-live="polite" data-bind="css: {'is-loading': rateLoading}">
+        <!-- ko if: rateLoading -->
+        <p class="tony-cc-status" data-bind="i18n: 'Loading exchange rate…'"></p>
+        <!-- /ko -->
+
+        <!-- ko if: rateError -->
+        <div class="message error"><div data-bind="text: rateError"></div></div>
+        <!-- /ko -->
+
+        <!-- ko if: hasRate -->
+        <p class="tony-cc-converted">
+            <span class="tony-cc-amount" data-bind="text: amountDisplay() + ' ' + from()"></span>
+            <span class="tony-cc-equals">=</span>
+            <strong class="tony-cc-value" data-bind="text: convertedDisplay() + ' ' + to()"></strong>
+        </p>
+        <p class="tony-cc-rates">
+            <span data-bind="text: rateLine"></span>
+            <span class="tony-cc-sep" aria-hidden="true">·</span>
+            <span data-bind="text: inverseRateLine"></span>
+        </p>
+        <!-- ko if: sameCurrency -->
+        <p class="tony-cc-meta" data-bind="i18n: 'Both currencies are the same.'"></p>
+        <!-- /ko -->
+        <!-- ko if: rateDateLine -->
+        <p class="tony-cc-meta">
+            <span data-bind="text: rateDateLine"></span>.
+            <span data-bind="i18n: 'Reference rates are published daily and are not live quotes.'"></span>
+        </p>
+        <!-- /ko -->
+        <!-- /ko -->
+    </section>
+
+    <section class="tony-cc-history">
+        <div class="tony-cc-history-head">
+            <h2 class="tony-cc-title" data-bind="text: historyTitle"></h2>
+            <span class="tony-cc-change" data-bind="text: changeDisplay, css: changeClass, visible: changeDisplay"></span>
+        </div>
+
+        <div class="tony-cc-ranges" role="group" data-bind="attr: {'aria-label': rangeGroupLabel}, foreach: ranges">
+            <button type="button" class="tony-cc-range"
+                    data-bind="text: $data,
+                               click: $parent.setRange.bind($parent, $data),
+                               css: {'is-active': $parent.range() === $data},
+                               attr: {'aria-pressed': $parent.range() === $data ? 'true' : 'false'}"></button>
+        </div>
+
+        <div class="tony-cc-chart" data-bind="css: {'is-loading': historyLoading}">
+            <canvas role="img" data-bind="afterRender: initChart, attr: {'aria-label': historyTitle}"></canvas>
+
+            <!-- ko if: historyLoading -->
+            <p class="tony-cc-overlay" data-bind="i18n: 'Loading history…'"></p>
+            <!-- /ko -->
+            <!-- ko if: historyError -->
+            <p class="tony-cc-overlay tony-cc-overlay--error" data-bind="text: historyError"></p>
+            <!-- /ko -->
+            <!-- ko if: historyEmpty -->
+            <p class="tony-cc-overlay" data-bind="i18n: 'No history available for this pair.'"></p>
+            <!-- /ko -->
+            <!-- ko if: sameCurrency -->
+            <p class="tony-cc-overlay" data-bind="i18n: 'Pick two different currencies to see how the rate moved.'"></p>
+            <!-- /ko -->
+        </div>
+        <p class="tony-cc-source">
+            <span data-bind="i18n: 'Data:'"></span>
+            <a href="https://frankfurter.dev" target="_blank" rel="noopener noreferrer">Frankfurter</a>
+        </p>
+    </section>
+    <!-- /ko -->
+</div>

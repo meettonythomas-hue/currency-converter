@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="currency_converter" translate="label,description"
+          instance="Tony\CurrencyConverter\Model\Cache\Type">
+        <label>Currency Converter Rates</label>
+        <description>Frankfurter API responses (currency list, current rates, rate history).</description>
+    </type>
+</config>

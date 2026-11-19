@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="currency_converter" translate="label" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Currency Converter</label>
+            <tab>general</tab>
+            <resource>Tony_CurrencyConverter::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Storefront</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Converter Page</label>
+                    <comment>Page is available at /currency-converter.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_from" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default "From" Currency</label>
+                    <comment>Currency code, e.g. USD.</comment>
+                    <validate>required-entry validate-alphanum</validate>
+                </field>
+                <field id="default_to" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default "To" Currency</label>
+                    <comment>Currency code, e.g. EUR.</comment>
+                    <validate>required-entry validate-alphanum</validate>
+                </field>
+                <field id="include_crypto" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Cryptocurrencies</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_footer_link" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Link in Footer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="api" translate="label" sortOrder="20" showInDefault="1">
+                <label>Frankfurter API</label>
+                <field id="base_url" translate="label" type="text" sortOrder="10" showInDefault="1">
+                    <label>API Base URL</label>
+                    <validate>required-entry validate-url</validate>
+                </field>
+                <field id="timeout" translate="label comment" type="text" sortOrder="20" showInDefault="1">
+                    <label>Request Timeout (seconds)</label>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="currencies_ttl" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Currency List Cache Lifetime (seconds)</label>
+                    <validate>required-entry validate-digits</validate>
+                </field>
+                <field id="rate_ttl" translate="label" type="text" sortOrder="40" showInDefault="1">
+                    <label>Current Rate Cache Lifetime (seconds)</label>
+                    <validate>required-entry validate-digits</validate>
+                </field>
+                <field id="history_ttl" translate="label" type="text" sortOrder="50" showInDefault="1">
+                    <label>History Cache Lifetime (seconds)</label>
+                    <validate>required-entry validate-digits</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

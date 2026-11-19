@@ -1,0 +1,17 @@
+<?php
+/**
+ * Copyright © Tony. All rights reserved.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Tony\CurrencyConverter\ViewModel\Converter $viewModel */
+$viewModel = $block->getData('view_model');
+?>
+<div class="tony-currency-converter" data-bind="scope: 'currencyConverter'">
+    <p class="tony-cc-placeholder" data-bind="visible: false">
+        <?= $escaper->escapeHtml(__('Loading currency converter…')) ?>
+    </p>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init"><?= /* @noEscape */ $viewModel->getJsLayout() ?></script>

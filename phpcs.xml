@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+    Coding standard for this module. Run from the module root:
+        ../../../../vendor/bin/phpcs
+    IDE phpcs extensions pick this file up automatically, so they check against
+    the Magento2 standard instead of phpcs's built-in default (PEAR).
+-->
+<ruleset name="Tony_CurrencyConverter">
+    <description>Magento 2 coding standard for Tony_CurrencyConverter.</description>
+
+    <file>.</file>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <arg name="extensions" value="php,phtml,xml,less,js,html"/>
+    <arg value="sp"/>
+
+    <rule ref="Magento2"/>
+</ruleset>

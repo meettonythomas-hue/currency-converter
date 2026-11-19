@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Tony\CurrencyConverter\Api\ExchangeRateServiceInterface"
+                type="Tony\CurrencyConverter\Model\ExchangeRateService"/>
+    <preference for="Tony\CurrencyConverter\Api\Data\CurrencyInterface"
+                type="Tony\CurrencyConverter\Model\Data\Currency"/>
+    <preference for="Tony\CurrencyConverter\Api\Data\RateInterface"
+                type="Tony\CurrencyConverter\Model\Data\Rate"/>
+    <preference for="Tony\CurrencyConverter\Api\Data\HistoryPointInterface"
+                type="Tony\CurrencyConverter\Model\Data\HistoryPoint"/>
+</config>
